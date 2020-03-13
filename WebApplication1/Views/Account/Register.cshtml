@@ -1,0 +1,64 @@
+﻿@model WebApplication1.Models.UserAccount
+@{
+    ViewBag.Title = "Register";
+}
+
+<div style="margin-left:20%">
+    <h2>Register</h2>
+    <br>
+    <br>
+    <div style="color: red;" class="col-md-2"></div>
+
+    <div style="color: red;" class="col-md-10">
+        @ViewBag.Msg
+    </div>
+
+
+    <br><br>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+    {
+<fieldset>
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @if (@ViewBag.Message != null)
+    {
+        <div style="border: 1px solid red">
+            @ViewBag.Message
+        </div>
+    }
+    <div class="form-group">
+        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" style="margin-top: 8%;">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" style="margin-top: 16%;">
+        @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FullName,new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10" style="margin-top: 5%;">
+            <input type="submit" value="Register" class="btn btn-default" />
+        </div>
+    </div>
+
+</fieldset>
+    }
+    <br><br>
+    @Html.ActionLink("Back home", "Index", "Home")
+

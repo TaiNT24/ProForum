@@ -1,0 +1,74 @@
+﻿@model WebApplication1.Models.Article
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Article</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtTittle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtTittle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtPostTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtPostTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtAuthor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtAuthor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ViewCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ViewCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LikeCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LikeCount)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ArtID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

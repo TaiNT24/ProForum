@@ -25,8 +25,12 @@ namespace WebApplication1.Models
         public DateTime ArtPostTime { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(50)]
         public string ArtAuthor { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string ArtUsername { get; set; }
 
         [Required]
         [StringLength(30)]

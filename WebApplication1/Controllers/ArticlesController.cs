@@ -40,6 +40,13 @@ namespace WebApplication1.Controllers
         // GET: Articles/Create
         public ActionResult Create()
         {
+            object username = Session["USER_NAME"];
+            if (username == null)
+            {
+                Session["Redirect_to_PostArticle"] = "You need Login to Post article";
+
+                return RedirectToAction("Login","Accounts");
+            }
             return View();
         }
 
@@ -48,10 +55,19 @@ namespace WebApplication1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ArtID,ArtTittle,ArtContent,ArtPostTime,ArtAuthor,ArtStatus,ViewCount,LikeCount")] Article article)
+        public ActionResult Create([Bind(Include = "ArtID,ArtTittle,ArtContent,ArtPostTime,ArtAuthor,ArtUsername,ArtStatus")] Article article)
         {
             if (ModelState.IsValid)
             {
+                string author = Session["FULL_NAME"].ToString();
+                string username = Session["USER_NAME"].ToString();
+
+
+                article.ArtPostTime = DateTime.Now;
+                article.ArtAuthor = author;
+                article.ArtUsername = username;
+                article.ArtStatus = "New";
+
                 db.Articles.Add(article);
                 db.SaveChanges();
                 return RedirectToAction("Index");

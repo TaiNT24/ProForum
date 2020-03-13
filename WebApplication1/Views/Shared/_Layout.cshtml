@@ -23,8 +23,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("IndexYourSelf", "Index", "HelloWorld")</li>
+                    <li>@Html.ActionLink("Article", "Index", "Articles")</li>
+                    <li>@Html.ActionLink("Post ArticleArticles", "Create", "Articles")</li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -36,7 +36,7 @@
                     @if (Session["USER_NAME"] != null)
                     {
                         <li class="navbar-text text-uppercase" style="color:white;">
-                            <text>Welcome @Session["USER_NAME"].ToString()</text>
+                            <text>Welcome @Session["FULL_NAME"].ToString()</text>
                         </li>
                         <li>@Html.ActionLink("Logout", "Logout", "Accounts")</li>
                     }

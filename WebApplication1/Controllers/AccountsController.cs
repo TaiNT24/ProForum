@@ -17,9 +17,15 @@ namespace WebApplication1.Controllers
                 ViewBag.Msg = Session["Msg_reg_succ"].ToString();
                 Session.Remove("Msg_reg_succ");
             }
+            if (Session["Redirect_to_PostArticle"] != null)
+            {
+                ViewBag.Message = Session["Redirect_to_PostArticle"].ToString();
+                Session.Remove("Redirect_to_PostArticle");
+            }
 
             return View();
         }
+
 
         public ActionResult Register()
         {
@@ -35,15 +41,19 @@ namespace WebApplication1.Controllers
 
         //
         [HttpPost]
-        public ActionResult Login(Account formCollection)
+        public ActionResult Login(Account account)
         {
             if (ModelState.IsValid)
             {
                 ListAccount Accounts = new ListAccount();
-                string acc = Accounts.checkLogin(formCollection.Username, formCollection.Password,formCollection.Role);
-                if (acc != null)
+                string fullname = Accounts.checkLogin(account.Username, account.Password,account.Role);
+                if (fullname != null)
                 {
-                    Session["USER_NAME"] = acc;
+                    account.FullName = fullname;
+
+                    Session["FULL_NAME"] = account.FullName;
+                    Session["USER_NAME"] = account.Username;
+
                     return RedirectToAction("Index", "Home");
                 }
                 else

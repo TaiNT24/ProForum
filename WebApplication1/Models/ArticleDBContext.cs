@@ -30,6 +30,10 @@ namespace WebApplication1.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Article>()
+                .Property(e => e.ArtUsername)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Article>()
                 .Property(e => e.ArtStatus)
                 .IsUnicode(false);
         }

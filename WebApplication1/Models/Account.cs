@@ -45,7 +45,7 @@ namespace WebApplication1.Models
             String sqlQueryUser = "select FullName, Status from UserAccount " +
                 "where Username = @username and Password= @password";
 
-            String sqlQueryAdmin = "select AdminName from AdminAccount " +
+            String sqlQueryAdmin = "select AdminName from UserAccount " +
                 "where AdminUsername = @username and AdminPassword= @password";
 
             SqlCommand command = new SqlCommand(sqlQueryUser, conn);
@@ -78,13 +78,15 @@ namespace WebApplication1.Models
         {
             SqlConnection conn = new SqlConnection(connStr);
 
-            String sqlQuery = "Insert into Account values(@username,@password,@fullname,@status)";
+            String sqlQuery = "Insert into UserAccount values(@username,@password,@fullname,@status,@role)";
 
             SqlCommand command = new SqlCommand(sqlQuery, conn);
             command.Parameters.AddWithValue("@username", account.Username);
             command.Parameters.AddWithValue("@password", account.Password);
             command.Parameters.AddWithValue("@fullname", account.FullName);
             command.Parameters.AddWithValue("@status", "Active");
+            command.Parameters.AddWithValue("@role", false);
+
 
 
             if (conn.State == ConnectionState.Closed)

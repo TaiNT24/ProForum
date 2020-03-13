@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Movie App </title>+
+    <title>@ViewBag.Title - Movie App </title>
     <link rel="stylesheet" href="~/Content/style.css">
 
     @Styles.Render("~/Content/css")
@@ -30,15 +30,15 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (Session["USER_NAME"] == null)
                     {
-                        <li>@Html.ActionLink("Register", "Register", "Account")</li>
-                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Register", "Register", "Accounts")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Accounts")</li>
                     }
                     @if (Session["USER_NAME"] != null)
                     {
                         <li class="navbar-text text-uppercase" style="color:white;">
                             <text>Welcome @Session["USER_NAME"].ToString()</text>
                         </li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Accounts")</li>
                     }
                 </ul>
             </div>

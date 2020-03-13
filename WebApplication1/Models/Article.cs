@@ -32,9 +32,6 @@ namespace WebApplication1.Models
         [StringLength(30)]
         public string ArtStatus { get; set; }
 
-        public int ViewCount { get; set; }
-
-        public int LikeCount { get; set; }
     }
 
     public class ArticleList

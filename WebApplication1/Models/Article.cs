@@ -53,5 +53,7 @@ namespace WebApplication1.Models
             var list = context.Database.SqlQuery<Article>(sqlQuery).ToList();
             return list;
         }
+
+
     }
 }

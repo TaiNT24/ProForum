@@ -10,128 +10,109 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class ArticlesController : Controller
+    public class CommentsController : Controller
     {
-        private ArticleDBContext db = new ArticleDBContext();
+        private CommentDBContext db = new CommentDBContext();
 
-        // GET: Articles
-        public ActionResult Index()
+        // GET: Comments
+        public ActionResult Index(int? id)
         {
-            ArticleList articleList = new ArticleList();
-            List<Article> list = articleList.getListActiveArticle();
-            return View(list);
+            //method get comment list with id
+
+            return View();
         }
 
-        // GET: Articles/Details/5
+        // GET: Comments/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Article article = db.Articles.Find(id);
-            if (article == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            RedirectToAction("Login","Account");
-
-            return View(article);
+            return View(comment);
         }
 
-        // GET: Articles/Create
+        // GET: Comments/Create
         public ActionResult Create()
         {
-            object username = Session["USER_NAME"];
-            if (username == null)
-            {
-                Session["Redirect_to_PostArticle"] = "You need Login to Post article";
-
-                return RedirectToAction("Login","Accounts");
-            }
             return View();
         }
 
-        // POST: Articles/Create
+        // POST: Comments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ArtID,ArtTittle,ArtContent,ArtPostTime,ArtAuthor,ArtUsername,ArtStatus")] Article article)
+        public ActionResult Create([Bind(Include = "CommID,CommContent,CommPostTime,Username,ArtID")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                string author = Session["FULL_NAME"].ToString();
-                string username = Session["USER_NAME"].ToString();
-
-
-                article.ArtPostTime = DateTime.Now;
-                article.ArtAuthor = author;
-                article.ArtUsername = username;
-                article.ArtStatus = "New";
-
-                db.Articles.Add(article);
+                db.Comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(article);
+            return View(comment);
         }
 
-        // GET: Articles/Edit/5
+        // GET: Comments/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Articles.Find(id);
-            if (article == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(article);
+            return View(comment);
         }
 
-        // POST: Articles/Edit/5
+        // POST: Comments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ArtID,ArtTittle,ArtContent,ArtPostTime,ArtAuthor,ArtStatus,ViewCount,LikeCount")] Article article)
+        public ActionResult Edit([Bind(Include = "CommID,CommContent,CommPostTime,Username,ArtID")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(article).State = EntityState.Modified;
+                db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(article);
+            return View(comment);
         }
 
-        // GET: Articles/Delete/5
+        // GET: Comments/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Articles.Find(id);
-            if (article == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(article);
+            return View(comment);
         }
 
-        // POST: Articles/Delete/5
+        // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Article article = db.Articles.Find(id);
-            db.Articles.Remove(article);
+            Comment comment = db.Comments.Find(id);
+            db.Comments.Remove(comment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

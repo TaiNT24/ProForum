@@ -66,24 +66,6 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        //
-        //[HttpPost]
-        //public ActionResult Login(string username, string password)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        ListAccount Accounts = new ListAccount();
-        //        string username1 = Accounts.checkLogin(username, password);
-
-        //        if (username1 != null)
-        //        {
-        //            Session["USER_NAME"] = username1;
-        //            return RedirectToAction("Index", "Home");
-        //        }
-        //    }
-
-        //    return View();
-        //}
 
         // POST: Account/Create
         [HttpPost]

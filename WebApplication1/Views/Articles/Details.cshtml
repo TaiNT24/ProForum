@@ -50,25 +50,11 @@
             @Html.DisplayFor(model => model.ArtStatus)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ViewCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ViewCount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LikeCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LikeCount)
-        </dd>
-
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ArtID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@*comment => Index(int? id) trong CommentsController*@

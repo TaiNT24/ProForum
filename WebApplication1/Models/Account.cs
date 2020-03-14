@@ -42,16 +42,16 @@ namespace WebApplication1.Models
         {
             SqlConnection conn = new SqlConnection(connStr);
 
-            String sqlQueryUser = "select FullName, Status from UserAccount " +
-                "where Username = @username and Password= @password";
+            String sqlQuery = "select FullName, Status from UserAccount " +
+                "where Username = @username and Password= @password and Role=@role";
 
-            String sqlQueryAdmin = "select AdminName from UserAccount " +
-                "where AdminUsername = @username and AdminPassword= @password";
 
-            SqlCommand command = new SqlCommand(sqlQueryUser, conn);
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@role", 0);
+
             if (roleStr.ToString().Equals("Admin"))
             {
-                command = new SqlCommand(sqlQueryAdmin, conn);
+                command.Parameters.AddWithValue("@role", 1);
             }
             
             

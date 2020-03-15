@@ -1,0 +1,59 @@
+﻿@model WebApplication1.Models.ViewModelResult
+@{
+    ViewBag.Title = "Result";
+}
+
+<h2>Result</h2>
+
+<div class="tt-item">
+    <div class="tt-single-topic">
+        <div class="tt-item-header">
+            <div class="tt-item-info info-top">
+                <div class="tt-avatar-icon">
+                    <i class="tt-icon"><svg><use xlink:href="#icon-ava-d"></use></svg></i>
+                </div>
+                <div class="tt-avatar-title">
+                    <a href="#"> @Html.DisplayFor(model => model.articleDetail.ArtAuthor)</a>
+                </div>
+                <a href="#" class="tt-info-time">
+                    <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i> @Html.DisplayFor(model => model.articleDetail.ArtPostTime)
+                </a>
+            </div>
+            <h2 class="tt-title">@Html.DisplayFor(model => model.articleDetail.ArtTittle)</h2>
+            <div class="tt-item-tag">
+
+            </div>
+        </div>
+        <div class="tt-item-description">
+
+            <p>
+                @Html.DisplayFor(model => model.articleDetail.ArtContent)
+            </p>
+
+        </div>
+
+    </div>
+</div>
+
+@foreach (var item in Model.listComment)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommPostTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArtID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.CommID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.CommID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.CommID })
+        </td>
+    </tr>
+}

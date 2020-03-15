@@ -30,14 +30,12 @@ namespace WebApplication1.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Article article = db.Articles.Find(id);
-            if (article == null)
-            {
-                return HttpNotFound();
-            }
-            RedirectToAction("Login","Account");
-
-            return View(article);
+            CommentList cmtList = new CommentList();
+            var comments = cmtList.getListComment(id);
+            ArticleList art = new ArticleList();
+            var details = art.getDetailArticle(id);
+            var model = new ViewModelResult { articleDetail = details, listComment = comments };
+            return View(model);
         }
 
         // GET: Articles/Create

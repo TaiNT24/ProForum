@@ -146,6 +146,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CommentDBContext.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\ViewModelResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

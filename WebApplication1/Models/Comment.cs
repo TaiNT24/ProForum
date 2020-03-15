@@ -5,7 +5,7 @@ namespace WebApplication1.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-
+    using System.Linq;
     [Table("Comment")]
     public partial class Comment
     {
@@ -27,6 +27,23 @@ namespace WebApplication1.Models
 
     public class CommentList
     {
+        CommentDBContext context = null;
+
+        public CommentList()
+        {
+            context = new CommentDBContext();
+        }
+
+        public List<Comment> getListComment(int? idArt)
+        {
+
+            String sqlQuery = "select * from Comment where ArtID={0} order by CommPostTime DESC";
+
+            var list = context.Database.SqlQuery<Comment>(sqlQuery, idArt).ToList();
+            return list;
+        }
+
+
 
     }
 }

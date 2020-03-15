@@ -1,60 +1,71 @@
-﻿@model WebApplication1.Models.Article
-
+﻿@model WebApplication1.Models.ViewModelResult
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Result";
 }
 
-<h2>Details</h2>
+<div class="tt-single-topic">
+    <div class="tt-item-header">
+        <div class="tt-item-info info-top">
+            <div class="tt-avatar-icon">
+                <i class="tt-icon"><svg><use xlink:href="#icon-ava-d"></use></svg></i>
+            </div>
+            <div class="tt-avatar-title">
+                <a href="#"> @Html.DisplayFor(model => model.articleDetail.ArtAuthor)</a>
+            </div>
+            <a href="#" class="tt-info-time">
+                <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i> @Html.DisplayFor(model => model.articleDetail.ArtPostTime)
+            </a>
+        </div>
+        <h1 class="tt-title">@Html.DisplayFor(model => model.articleDetail.ArtTittle)</h1>
+        <div class="tt-item-tag">
 
-<div>
-    <h4>Article</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ArtTittle)
-        </dt>
+        </div>
+    </div>
+    <div class="tt-item-description">
 
-        <dd>
-            @Html.DisplayFor(model => model.ArtTittle)
-        </dd>
+        <h>
+            @Html.DisplayFor(model => model.articleDetail.ArtContent)
+        </h>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ArtContent)
-        </dt>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ArtContent)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ArtPostTime)
-        </dt>
+    <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.ArtPostTime)
-        </dd>
+    <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ArtAuthor)
-        </dt>
+    <br />
+    <h3 class="page-header">Comments</h3>
+    @foreach (var item in Model.listComment)
+    {
 
-        <dd>
-            @Html.DisplayFor(model => model.ArtAuthor)
-        </dd>
+        <section class="comment-list">
+            <!-- First Comment -->
+            <article class="row">
+                <div class="col-md-2 col-sm-2 hidden-xs">
+                    <figure class="thumbnail">
+                        <img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png" />
+                        <figcaption class="text-center">  @Html.DisplayFor(modelItem => item.Username)</figcaption>
+                    </figure>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <div class="panel panel-default arrow left">
+                        <div class="panel-body">
+                            <header class="text-left">
+                                <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
+                                <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>  @Html.DisplayFor(modelItem => item.CommPostTime)</time>
+                            </header>
+                            <div class="comment-post">
+                                <p>
+                                    @Html.DisplayFor(modelItem => item.CommContent)
+                                </p>
+                            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ArtStatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ArtStatus)
-        </dd>
-
-    </dl>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+    }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ArtID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
 
-@*comment => Index(int? id) trong CommentsController*@

@@ -53,7 +53,12 @@ namespace WebApplication1.Models
             var list = context.Database.SqlQuery<Article>(sqlQuery).ToList();
             return list;
         }
-
+        public Article getDetailArticle(int? ArtId)
+        {
+            String sqlQuery = "select * from Article where ArtID={0}";
+            var article = context.Database.SqlQuery<Article>(sqlQuery, ArtId).FirstOrDefault();
+            return article;
+        }
 
     }
 }

@@ -49,7 +49,9 @@ namespace WebApplication1.Models
 
         public List<Article> getListActiveArticle()
         {
-            String sqlQuery = "select * from Article where ArtStatus='Active'";
+            String sqlQuery = "select * from Article " +
+                                "where ArtStatus='Active' " +
+                                "Order by ArtPostTime desc";
             var list = context.Database.SqlQuery<Article>(sqlQuery).ToList();
             return list;
         }
@@ -60,5 +62,25 @@ namespace WebApplication1.Models
             return article;
         }
 
+        public List<Article> searchActiveArticle(string searchVal)
+        {
+            searchVal = "%" +searchVal+ "%";
+            String sqlQuery = "select * from Article " +
+                                "where ArtStatus='Active' and ArtTittle like {0} " +
+                                "Order by ArtPostTime desc";
+
+            var list = context.Database.SqlQuery<Article>(sqlQuery,searchVal).ToList();
+            return list;
+        }
+
+
+        public List<Article> getListArticleOfUser(string username)
+        {
+            String sqlQuery = "select * from Article " +
+                                "where ArtUsername={0} " +
+                                "Order by ArtPostTime desc";
+            var list = context.Database.SqlQuery<Article>(sqlQuery, username).ToList();
+            return list;
+        }
     }
 }

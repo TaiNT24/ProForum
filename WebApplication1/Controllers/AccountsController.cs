@@ -12,16 +12,24 @@ namespace WebApplication1.Controllers
         // GET: Account
         public ActionResult Login()
         {
-            if (Session["Msg_reg_succ"] != null)
+            try
             {
-                ViewBag.Msg = Session["Msg_reg_succ"].ToString();
-                Session.Remove("Msg_reg_succ");
+                if (Session["Msg_reg_succ"] != null)
+                {
+                    ViewBag.Msg = Session["Msg_reg_succ"].ToString();
+                    Session.Remove("Msg_reg_succ");
+                }
+                if (Session["Redirect_to_PostArticle"] != null)
+                {
+                    ViewBag.Message = Session["Redirect_to_PostArticle"].ToString();
+                    Session.Remove("Redirect_to_PostArticle");
+                }
             }
-            if (Session["Redirect_to_PostArticle"] != null)
+            catch(Exception e)
             {
-                ViewBag.Message = Session["Redirect_to_PostArticle"].ToString();
-                Session.Remove("Redirect_to_PostArticle");
+                CommonUse.WriteLogError(e);
             }
+            
 
             return View();
         }
@@ -43,25 +51,31 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult Login(Account account)
         {
-            if (ModelState.IsValid)
+            try
             {
-                ListAccount Accounts = new ListAccount();
-                string fullname = Accounts.checkLogin(account.Username, account.Password,account.Role);
-                if (fullname != null)
+                if (ModelState.IsValid)
                 {
-                    account.FullName = fullname;
+                    ListAccount Accounts = new ListAccount();
+                    string fullname = Accounts.checkLogin(account.Username, account.Password, account.Role);
+                    if (fullname != null)
+                    {
+                        account.FullName = fullname;
 
-                    Session["FULL_NAME"] = account.FullName;
-                    Session["USER_NAME"] = account.Username;
+                        Session["FULL_NAME"] = account.FullName.ToUpper();
+                        Session["USER_NAME"] = account.Username;
 
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ViewBag.Message = "Invalid username or password";
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Invalid username or password";
+                    }
                 }
             }
-
+            catch(Exception e)
+            {
+                CommonUse.WriteLogError(e);
+            }
 
             return View();
         }
@@ -90,13 +104,37 @@ namespace WebApplication1.Controllers
                 }
 
             }
-            catch
+            catch(Exception e)
             {
                 ViewBag.Message = "This Username has been exist! Please choose another one";
+                CommonUse.WriteLogError(e);
             }
             return View();
         }
 
+
+        public ActionResult Profile()
+        {
+            String username = Session["USER_NAME"].ToString();
+            
+
+
+            if (username == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                String fullname = Session["FULL_NAME"].ToString();
+                ViewBag.Author = fullname;
+                ArticleList articleList = new ArticleList();
+
+                List<Article> listArticle = articleList.getListArticleOfUser(username);
+                
+                return View(listArticle);
+
+            }
+        }
 
     }
 }

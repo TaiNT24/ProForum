@@ -47,11 +47,15 @@ namespace WebApplication1.Models
 
 
             SqlCommand command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@role", 0);
+            
 
             if (roleStr.ToString().Equals("Admin"))
             {
                 command.Parameters.AddWithValue("@role", 1);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("@role", 0);
             }
             
             

@@ -22,11 +22,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Article", "Index", "Articles")</li>
                     <li>@Html.ActionLink("Post ArticleArticles", "Create", "Articles")</li>
                 </ul>
 
+                s
                 <ul class="nav navbar-nav navbar-right">
                     @if (Session["USER_NAME"] == null)
                     {
@@ -35,11 +35,23 @@
                     }
                     @if (Session["USER_NAME"] != null)
                     {
-                        <li class="navbar-text text-uppercase" style="color:white;">
+                        <li class="navbar-text" style="color:white;">
                             <text>Welcome @Session["FULL_NAME"].ToString()</text>
                         </li>
+
+                        <li>@Html.ActionLink("Profile", "Profile", "Accounts")</li>
+
                         <li>@Html.ActionLink("Logout", "Logout", "Accounts")</li>
                     }
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <form class="form-group navbar-text" action="Articles">
+                        <input type="text" class="form-control" 
+                               name="searchVal" 
+                               placeholder="Search article"
+                               />
+                    </form>
                 </ul>
             </div>
 

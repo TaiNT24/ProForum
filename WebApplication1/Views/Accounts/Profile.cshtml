@@ -1,0 +1,77 @@
+﻿@model IEnumerable<WebApplication1.Models.Article>
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<h2>Profile: <span> @ViewBag.Author </span></h2>
+
+
+<div class="tt-topic-list">
+    <div class="tt-list-header">
+        <div class="tt-col-topic col-10">Topic</div>
+        <div class="tt-col-value hide-mobile">Time post</div>
+    </div>
+
+    @*@Html.ActionLink("Edit", "Edit", new { id = item.ArtID })
+        @Html.ActionLink("Details", "Details", new { id = item.ArtID })
+        @Html.ActionLink("Delete", "Delete", new { id = item.ArtID })*@
+
+    @foreach (var item in Model)
+    {
+        //article ID
+        <div class="tt-topic-alert tt-alert-default" role="alert">
+            @Html.ActionLink(item.ArtTittle, "Details","Articles", new { id = item.ArtID }, null)
+        </div>
+
+        <div class="tt-item tt-itemselect">
+            <div class="tt-col-description col-10">
+                <h6 class="tt-title">
+                    @Html.DisplayName(item.ArtContent.Substring(0, 20))
+                </h6>
+                <div class="row align-items-center no-gutters">
+                    <div class="col-9">
+                        <ul class="tt-list-badge">
+                            <li>
+                                <p>
+                                    @if (item.ArtStatus.Equals("New"))
+                                    {
+                                        <span class="label label-warning">
+                                            @Html.DisplayFor(modelItem => item.ArtStatus)
+                                        </span>
+                                    }
+                                    @if (item.ArtStatus.Equals("Active"))
+                                    {
+                                        <span class="label label-success">
+                                            @Html.DisplayFor(modelItem => item.ArtStatus)
+                                        </span>
+                                    }
+                                    @if (item.ArtStatus.Equals("Delete"))
+                                    {
+                                        <span class="label label-danger">
+                                            @Html.DisplayFor(modelItem => item.ArtStatus)
+                                        </span>
+                                    }
+
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tt-col-value hide-mobile">
+                @Html.DisplayFor(modelItem => item.ArtPostTime)
+            </div>
+        </div>
+
+
+        @*<div class="tt-row-btn">
+                <button type="button" class="btn-icon js-topiclist-showmore">
+                    <svg class="tt-icon">
+                        <use xlink:href="#icon-load_lore_icon"></use>
+                    </svg>
+                </button>
+            </div>*@
+    }
+</div>

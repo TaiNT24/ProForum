@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
+using System.IO;
 
 namespace WebApplication1.Models
 {
@@ -106,4 +107,39 @@ namespace WebApplication1.Models
             return false;
         }
     }
+
+    public class CommonUse
+    {
+        public static void WriteLogError(Exception ex)
+        {
+            StreamWriter sw = null;
+            try
+            {
+                sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "\\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now.ToString("g") + ": " + ex.Source + "; " + ex.Message);
+                sw.Flush();
+                sw.Close();
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+        public static void WriteLogErrorStr(Exception ex)
+        {
+            StreamWriter sw = null;
+            try
+            {
+                sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "\\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now.ToString("g") + ": " + ex.Source + "; " + ex.Message);
+                sw.Flush();
+                sw.Close();
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+    }
+
 }

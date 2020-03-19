@@ -4,11 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Article</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 <div class="tt-topic-list">
     <div class="tt-list-header">
@@ -30,7 +27,7 @@
         <div class="tt-item tt-itemselect">
             <div class="tt-col-description col-10">
                 <h6 class="tt-title">
-                    @Html.DisplayName(item.ArtContent.Substring(0, 30))
+                    @Html.DisplayName(item.ArtContent.Substring(0, 20))
                 </h6>
                 <div class="row align-items-center no-gutters">
                     <div class="col-9">

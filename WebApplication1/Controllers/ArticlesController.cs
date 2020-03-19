@@ -15,20 +15,49 @@ namespace WebApplication1.Controllers
         private ArticleDBContext db = new ArticleDBContext();
 
         // GET: Articles
-        public ActionResult Index()
+        //View all article/search
+        public ActionResult Index(string searchVal)
         {
-            ArticleList articleList = new ArticleList();
-            List<Article> list = articleList.getListActiveArticle();
+            List<Article> list = new List<Article>() ;
+            try
+            {
+                ArticleList articleList = new ArticleList();
+                list = articleList.getListActiveArticle();
+
+                if (searchVal != null)
+                {
+                    list.Clear();
+                    list = articleList.searchActiveArticle(searchVal);
+                }
+
+            }catch(Exception e)
+            {
+                CommonUse.WriteLogError(e);
+            }
+            
+
             return View(list);
         }
+
 
         // GET: Articles/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            ViewModelResult model = new ViewModelResult();
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                CommentList cmtList = new CommentList();
+                var comments = cmtList.getListComment(id);
+                ArticleList art = new ArticleList();
+                var details = art.getDetailArticle(id);
+                model = new ViewModelResult { articleDetail = details, listComment = comments };
             }
+<<<<<<< HEAD
 
             CommentList cmtList = new CommentList();
             var comments = cmtList.getListComment(id);
@@ -36,19 +65,34 @@ namespace WebApplication1.Controllers
             Comment cmt = new Comment();
             var details = art.getDetailArticle(id);
             var model = new ViewModelResult { articleDetail = details, listComment = comments,comment =cmt};
+=======
+            catch(Exception e)
+            {
+                CommonUse.WriteLogError(e);
+            }
+            
+>>>>>>> 78be6cd212bef3bb3df0fb969a44c47242901778
             return View(model);
         }
 
         // GET: Articles/Create
         public ActionResult Create()
         {
-            object username = Session["USER_NAME"];
-            if (username == null)
+            try
             {
-                Session["Redirect_to_PostArticle"] = "You need Login to Post article";
+                object username = Session["USER_NAME"];
+                if (username == null)
+                {
+                    Session["Redirect_to_PostArticle"] = "You need Login to Post article";
 
-                return RedirectToAction("Login","Accounts");
+                    return RedirectToAction("Login", "Accounts");
+                }
             }
+            catch(Exception e)
+            {
+                CommonUse.WriteLogError(e);
+            }
+            
             return View();
         }
 
@@ -61,18 +105,25 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                string author = Session["FULL_NAME"].ToString();
-                string username = Session["USER_NAME"].ToString();
+                try
+                {
+                    string author = Session["FULL_NAME"].ToString();
+                    string username = Session["USER_NAME"].ToString();
 
 
-                article.ArtPostTime = DateTime.Now;
-                article.ArtAuthor = author;
-                article.ArtUsername = username;
-                article.ArtStatus = "New";
+                    article.ArtPostTime = DateTime.Now;
+                    article.ArtAuthor = author;
+                    article.ArtUsername = username;
+                    article.ArtStatus = "New";
 
-                db.Articles.Add(article);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    db.Articles.Add(article);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch(Exception e)
+                {
+                    CommonUse.WriteLogError(e);
+                }
             }
 
             return View(article);
@@ -81,15 +132,24 @@ namespace WebApplication1.Controllers
         // GET: Articles/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            Article article = null;
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                article = db.Articles.Find(id);
+                if (article == null)
+                {
+                    return HttpNotFound();
+                }
             }
-            Article article = db.Articles.Find(id);
-            if (article == null)
+            catch(Exception e)
             {
-                return HttpNotFound();
+                CommonUse.WriteLogError(e);
             }
+            
             return View(article);
         }
 
@@ -102,9 +162,17 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(article).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(article).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch(Exception e)
+                {
+                    CommonUse.WriteLogError(e);
+                }
+                
             }
             return View(article);
         }
@@ -129,9 +197,16 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Article article = db.Articles.Find(id);
-            db.Articles.Remove(article);
-            db.SaveChanges();
+            try
+            {
+                Article article = db.Articles.Find(id);
+                db.Articles.Remove(article);
+                db.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                CommonUse.WriteLogError(e);
+            }
             return RedirectToAction("Index");
         }
 

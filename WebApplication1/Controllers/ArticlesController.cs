@@ -33,8 +33,9 @@ namespace WebApplication1.Controllers
             CommentList cmtList = new CommentList();
             var comments = cmtList.getListComment(id);
             ArticleList art = new ArticleList();
+            Comment cmt = new Comment();
             var details = art.getDetailArticle(id);
-            var model = new ViewModelResult { articleDetail = details, listComment = comments };
+            var model = new ViewModelResult { articleDetail = details, listComment = comments,comment =cmt};
             return View(model);
         }
 
@@ -56,7 +57,7 @@ namespace WebApplication1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ArtID,ArtTittle,ArtContent,ArtPostTime,ArtAuthor,ArtUsername,ArtStatus")] Article article)
+        public ActionResult Create([Bind(Include = "ArtID,ArtTittle,ArtContent,ArtPostTime,ArtAuthor,ArtUsername,ArtStatus")] Article article )
         {
             if (ModelState.IsValid)
             {

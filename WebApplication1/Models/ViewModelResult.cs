@@ -12,5 +12,6 @@ namespace WebApplication1.Models
     {
         public Article articleDetail { get; set; }
         public List<Comment> listComment { get; set; }
+        public Comment comment { get; set; }
     }
 }

@@ -38,10 +38,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Comments/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+
 
         // POST: Comments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -50,14 +47,16 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CommID,CommContent,CommPostTime,Username,ArtID")] Comment comment)
         {
-            if (ModelState.IsValid)
-            {
+           
+                string username = Session["USER_NAME"].ToString();
+             
+                comment.CommPostTime = DateTime.Now;
+                comment.Username = username;
                 db.Comments.Add(comment);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                return RedirectToAction("Details", "Articles", new { id = comment.ArtID });
 
-            return View(comment);
+            
         }
 
         // GET: Comments/Edit/5

@@ -6,10 +6,10 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Comment</h4>
         <hr />
@@ -19,22 +19,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CommContent, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CommContent, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CommPostTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CommPostTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CommPostTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -52,6 +36,10 @@
             </div>
         </div>
     </div>
+    @Html.HiddenFor(model => model.CommContent, new { Value = "a" })
+    @Html.HiddenFor(model => model.Username, new { Value = "a" })
+    @Html.HiddenFor(model => model.CommPostTime, new { Value = "2020-02-02" })
+    @Html.HiddenFor(model => model.ArtID, new { Value = "a" })
 }
 
 <div>

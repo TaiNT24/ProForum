@@ -57,21 +57,13 @@ namespace WebApplication1.Controllers
                 var details = art.getDetailArticle(id);
                 model = new ViewModelResult { articleDetail = details, listComment = comments };
             }
-<<<<<<< HEAD
 
-            CommentList cmtList = new CommentList();
-            var comments = cmtList.getListComment(id);
-            ArticleList art = new ArticleList();
-            Comment cmt = new Comment();
-            var details = art.getDetailArticle(id);
-            var model = new ViewModelResult { articleDetail = details, listComment = comments,comment =cmt};
-=======
             catch(Exception e)
             {
                 CommonUse.WriteLogError(e);
             }
             
->>>>>>> 78be6cd212bef3bb3df0fb969a44c47242901778
+
             return View(model);
         }
 

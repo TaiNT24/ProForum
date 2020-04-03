@@ -24,6 +24,7 @@
                 <ul class="nav navbar-nav">
                     @if (Session["ROLE"] != null && Session["USER_NAME"] != null)
                     {
+                        //admin
                         if (Session["ROLE"].ToString().Equals("Admin"))
                         {
                             <li>@Html.ActionLink("Manager Article", "Index", "Admin")</li>
@@ -31,15 +32,18 @@
                         }
                         else
                         {
+                            // user
                             <li>@Html.ActionLink("Article", "Index", "Articles")</li>
                         }
 
                     }
+                    //not login
                     @if (Session["ROLE"] == null || Session["USER_NAME"] == null)
                     {
                         <li>@Html.ActionLink("Article", "Index", "Articles")</li>
                     }
-                    <li>@Html.ActionLink("Post ArticleArticles", "Create", "Articles")</li>
+
+                    <li>@Html.ActionLink("Post Articles", "Create", "Articles")</li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -59,49 +63,21 @@
                         <li>@Html.ActionLink("Logout", "Logout", "Accounts")</li>
                     }
                 </ul>
-                @if (Session["ROLE"] != null && Session["USER_NAME"] != null)
-                {
-                    if (Session["ROLE"].ToString().Equals("Admin"))
-                    {
-                        <ul class="nav navbar-nav navbar-right">
-
-                            <form class="form-group navbar-text" action="Admin">
-                                <input type="text" class="form-control"
-                                       name="searchVal"
-                                       placeholder="Search article" />
-                            </form>
-
-                        </ul>
-                    }
-                    else
-                    {
-                        <ul class="nav navbar-nav navbar-right">
-
-                            <form class="form-group navbar-text" action="Articles">
-                                <input type="text" class="form-control"
-                                       name="searchVal"
-                                       placeholder="Search article" />
-                            </form>
-
-                        </ul>
-
-                    }
-                }
-                @if (Session["ROLE"] == null || Session["USER_NAME"] == null)
-                {
-                    <ul class="nav navbar-nav navbar-right">
-                        <form class="form-group navbar-text" action="Articles">
-                            <input type="text" class="form-control"
-                                   name="searchVal"
-                                   placeholder="Search article" />
-                        </form>
-                        </ul>
-                        }
-                </div>
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <form class="form-group navbar-text" action="Articles">
+                        <input type="text" class="form-control"
+                               name="searchVal"
+                               placeholder="Search article" />
+                    </form>
+                </ul>
+                    
+            </div>
 
                 
         </div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />

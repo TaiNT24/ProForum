@@ -173,9 +173,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\Img\91799533_903625730090492_8936361152242253824_n.jpg" />
     <Content Include="Views\Img\iconfinder_clock_1055090.png" />
     <Content Include="Views\Img\iconfinder_Watch_701487.png" />
+    <Content Include="Views\Img\user.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -197,7 +197,6 @@
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Movies\Edit.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
-    <Content Include="Views\Forum\Index.cshtml" />
     <Content Include="Views\Articles\Create.cshtml" />
     <Content Include="Views\Articles\Delete.cshtml" />
     <Content Include="Views\Articles\Details.cshtml" />
@@ -212,8 +211,6 @@
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\Accounts\Profile.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\Details.cshtml" />
-    <Content Include="Views\Admin\Delete.cshtml" />
     <Content Include="Views\Accounts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

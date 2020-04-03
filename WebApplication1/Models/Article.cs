@@ -20,6 +20,7 @@ namespace WebApplication1.Models
 
         [Required]
         [StringLength(3000)]
+        [MinLength(20)]
         public string ArtContent { get; set; }
 
         public DateTime ArtPostTime { get; set; }
@@ -82,12 +83,12 @@ namespace WebApplication1.Models
         }
         public List<Article> searchActiveArticle(string searchVal)
         {
-            searchVal = "%" +searchVal+ "%";
+            searchVal = "%" + searchVal + "%";
             String sqlQuery = "select * from Article " +
                                 "where ArtStatus='Active' and ArtTittle like {0} " +
                                 "Order by ArtPostTime desc";
 
-            var list = context.Database.SqlQuery<Article>(sqlQuery,searchVal).ToList();
+            var list = context.Database.SqlQuery<Article>(sqlQuery, searchVal).ToList();
             return list;
         }
         public List<Article> searchManagerArticle(string searchVal)
@@ -109,5 +110,6 @@ namespace WebApplication1.Models
             var list = context.Database.SqlQuery<Article>(sqlQuery, username).ToList();
             return list;
         }
+
     }
 }

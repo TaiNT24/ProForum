@@ -35,12 +35,6 @@ namespace WebApplication1.Controllers
         }
 
 
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-
         public ActionResult Logout()
         {
             Session.Clear();
@@ -59,13 +53,21 @@ namespace WebApplication1.Controllers
                     string fullname = Accounts.checkLogin(account.Username, account.Password, account.Role);
                     if (fullname != null)
                     {
-                        account.FullName = fullname;
+                        if (fullname.Equals("UserBlocked"))
+                        {
+                            ViewBag.Message = "Your account was blocked ! ";
+                        }
+                        else
+                        {
+                            account.FullName = fullname;
 
-                        Session["FULL_NAME"] = account.FullName.ToUpper();
-                        Session["USER_NAME"] = account.Username;
-                        Session["ROLE"] = account.Role;
+                            Session["FULL_NAME"] = account.FullName.ToUpper();
+                            Session["USER_NAME"] = account.Username;
+                            Session["ROLE"] = account.Role;
 
-                        return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Index", "Home");
+                        }
+
                     }
                     else
                     {
@@ -81,12 +83,23 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public ActionResult Register()
+        {
+            return View();
+        }
 
         // POST: Account/Create
         [HttpPost]
         public ActionResult Register(Account account)
         {
             bool isInsert = false;
+            if (account.FullName.Equals("UserBlocked"))
+            {
+                ViewBag.Message = "Please input real Full Name";
+
+                return View();
+            }
+
             try
             {
                 // TODO: Add insert logic here
@@ -145,7 +158,7 @@ namespace WebApplication1.Controllers
             {
                 ListAccount accountList = new ListAccount();
                 list = accountList.getListAccount();
-    
+
 
             }
             catch (Exception e)

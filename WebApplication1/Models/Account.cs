@@ -12,7 +12,7 @@ namespace WebApplication1.Models
     public class Account
     {
         [Required]
-        [StringLength(20, MinimumLength =3)]
+        [StringLength(20, MinimumLength = 3)]
         public string Username { get; set; }
 
         [Required]
@@ -42,7 +42,7 @@ namespace WebApplication1.Models
         {
             context = new ArticleDBContext();
         }
-        public string checkLogin(string username , string password, RoleAccount roleStr)
+        public string checkLogin(string username, string password, RoleAccount roleStr)
         {
             SqlConnection conn = new SqlConnection(connStr);
 
@@ -51,7 +51,7 @@ namespace WebApplication1.Models
 
 
             SqlCommand command = new SqlCommand(sqlQuery, conn);
-            
+
 
             if (roleStr.ToString().Equals("Admin"))
             {
@@ -61,21 +61,32 @@ namespace WebApplication1.Models
             {
                 command.Parameters.AddWithValue("@role", 0);
             }
-            
-            
+
+
             command.Parameters.AddWithValue("@username", username);
             command.Parameters.AddWithValue("@password", password);
 
-            if(conn.State == ConnectionState.Closed)
+            if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
             }
 
             SqlDataReader dr = command.ExecuteReader(CommandBehavior.CloseConnection);
-            if (dr.Read())
+            if (dr.HasRows)
             {
-                string fullname = dr.GetString(0);
-                return fullname; 
+                dr.Read();
+
+                string status = dr.GetString(1);
+                if (status.Equals("Blocked"))
+                {
+                    return "UserBlocked";
+                }
+                else
+                {
+                    string fullname = dr.GetString(0);
+                    return fullname;
+                }
+
             }
 
             return null;
@@ -84,6 +95,7 @@ namespace WebApplication1.Models
 
         public bool RegisterNewAccount(Account account)
         {
+
             SqlConnection conn = new SqlConnection(connStr);
 
             String sqlQuery = "Insert into UserAccount values(@username,@password,@fullname,@status,@role)";
@@ -103,13 +115,13 @@ namespace WebApplication1.Models
             }
 
             int row = command.ExecuteNonQuery();
-            if (row>0)
+            if (row > 0)
             {
                 return true;
             }
             return false;
         }
-  
+
         public List<Account> getListAccount()
         {
             String sqlQuery = "select Username,Fullname,Status from UserAccount where Role!=1 ";
@@ -119,9 +131,43 @@ namespace WebApplication1.Models
         public bool BlockAccount(string user)
         {
             String sqlQuery = "Update UserAccount set Status='Blocked' where Username={0}";
-             context.Database.ExecuteSqlCommand(sqlQuery, user);
+            context.Database.ExecuteSqlCommand(sqlQuery, user);
             return true;
         }
+
+        public bool getRole(string username)
+        {
+            SqlConnection conn = new SqlConnection(connStr);
+
+            String sqlQuery = "select Role from UserAccount " +
+                "where Username = @username";
+
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+
+
+            command.Parameters.AddWithValue("@username", username);
+
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
+            SqlDataReader dr = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+            bool role = false;
+
+            if (dr.HasRows)
+            {
+                dr.Read();
+
+                role = dr.GetBoolean(0); // true: admin
+            }
+            return role;
+        }
+
+
+
     }
 
     public class CommonUse

@@ -38,10 +38,11 @@
         </div>
     </div>
 
-    @Html.HiddenFor(model => model.ArtAuthor, new { Value = "a" })
-    @Html.HiddenFor(model => model.ArtUsername, new { Value = "a" })
+    @Html.HiddenFor(model => model.ArtAuthor, new { Value = Session["FULL_NAME"].ToString() })
+    @Html.HiddenFor(model => model.ArtUsername, new { Value = Session["USER_NAME"].ToString() })
+
     @Html.HiddenFor(model => model.ArtPostTime, new { Value = "2020-02-02" })
-    @Html.HiddenFor(model => model.ArtStatus, new { Value = "a" })
+    @Html.HiddenFor(model => model.ArtStatus, new { Value = "New" })
 
 }
 

@@ -26,3 +26,9 @@
 4/3/2020 11:40 AM: EntityFramework; The specified cast from a materialized 'System.Boolean' type to the 'WebApplication1.Models.RoleAccount' type is not valid.
 4/3/2020 11:40 AM: EntityFramework; The specified cast from a materialized 'System.Boolean' type to the 'WebApplication1.Models.RoleAccount' type is not valid.
 4/3/2020 11:43 AM: EntityFramework; The specified cast from a materialized 'System.Boolean' type to the 'WebApplication1.Models.RoleAccount' type is not valid.
+04/03/2020 19:10: .Net SqlClient Data Provider; Login failed for user 'sa'.
+04/03/2020 19:10: .Net SqlClient Data Provider; Login failed for user 'sa'.
+04/03/2020 19:10: .Net SqlClient Data Provider; Login failed for user 'sa'.
+04/03/2020 19:10: .Net SqlClient Data Provider; Login failed for user 'sa'.
+04/03/2020 19:10: .Net SqlClient Data Provider; Login failed for user 'sa'.
+04/03/2020 20:23: System.Data; Invalid attempt to read when no data is present.

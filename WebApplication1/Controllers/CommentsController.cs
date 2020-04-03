@@ -45,18 +45,18 @@ namespace WebApplication1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CommID,CommContent,CommPostTime,Username,ArtID")] Comment comment)
+        public ActionResult Create(Comment comment)
         {
-           
-                string username = Session["USER_NAME"].ToString();
-             
+
+            if (comment.Username != null)
+            {
                 comment.CommPostTime = DateTime.Now;
-                comment.Username = username;
+
                 db.Comments.Add(comment);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Articles", new { id = comment.ArtID });
+            }
+            return RedirectToAction("Details", "Articles", new { id = comment.ArtID });
 
-            
         }
 
         // GET: Comments/Edit/5

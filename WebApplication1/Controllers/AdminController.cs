@@ -33,35 +33,25 @@ namespace WebApplication1.Controllers
                 CommonUse.WriteLogError(e);
             }
 
-
             return View(list);
         }
 
-        // GET: Admin/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Deleted(int id)
         {
-            ViewModelResult model = new ViewModelResult();
-            try
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
 
-                CommentList cmtList = new CommentList();
-                var comments = cmtList.getListComment(id);
-                ArticleList art = new ArticleList();
-                var details = art.getDetailArticle(id);
-                model = new ViewModelResult { articleDetail = details, listComment = comments };
-            }
+            ArticleList articleList = new ArticleList();
+            articleList.Delete(id);
+            return RedirectToAction("Index", "Admin");
 
-            catch (Exception e)
-            {
-                CommonUse.WriteLogError(e);
-            }
+        }
+        public ActionResult Approved(int id)
+        {
 
+            ArticleList articleList = new ArticleList();
+            articleList.Approve(id);
 
-            return View(model);
+            return RedirectToAction("Index", "Admin");
+
         }
 
         // GET: Admin/Create
@@ -89,31 +79,10 @@ namespace WebApplication1.Controllers
         // GET: Admin/Edit/5
         public ActionResult Edit(int id)
         {
-
-
             return View();
         }
 
-        public ActionResult Deleted(int id)
-        {
         
-                ArticleList articleList = new ArticleList();
-              articleList.Delete(id);
-            return RedirectToAction("Index", "Admin");
-
-
-
-
-        }
-        public ActionResult Approved(int id)
-        {
-          
-                ArticleList articleList = new ArticleList();
-                articleList.Approve(id);
-
-                return RedirectToAction("Index","Admin");
-
-        }
         // POST: Admin/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)

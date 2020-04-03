@@ -27,7 +27,21 @@ namespace WebApplication1.Controllers
                 if (searchVal != null)
                 {
                     list.Clear();
-                    list = articleList.searchActiveArticle(searchVal);
+                    if(Session["ROLE"] != null)
+                    {
+                        if (Session["ROLE"].ToString().Equals("Admin"))
+                        {
+                            return RedirectToAction("Index", "Admin", new {searchVal});
+                        }
+                        else
+                        {
+                            list = articleList.searchActiveArticle(searchVal);
+                        }
+                    }
+                    else
+                    {
+                        list = articleList.searchActiveArticle(searchVal);
+                    }
                 }
 
             }catch(Exception e)
@@ -93,24 +107,30 @@ namespace WebApplication1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ArtID,ArtTittle,ArtContent,ArtPostTime,ArtAuthor,ArtUsername,ArtStatus")] Article article )
+        public ActionResult Create(Article article )
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    string author = Session["FULL_NAME"].ToString();
-                    string username = Session["USER_NAME"].ToString();
-
-
                     article.ArtPostTime = DateTime.Now;
-                    article.ArtAuthor = author;
-                    article.ArtUsername = username;
                     article.ArtStatus = "New";
 
+
+                    ListAccount accountManager = new ListAccount();
+                    bool isAdmin = accountManager.getRole(article.ArtUsername);
+                    if (isAdmin)
+                    {
+                        article.ArtStatus = "Active";
+
+                        db.Articles.Add(article);
+                        db.SaveChanges();
+                        return RedirectToAction("Index","Admin");
+                    }
+                    
                     db.Articles.Add(article);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Profile", "Accounts");
                 }
                 catch(Exception e)
                 {

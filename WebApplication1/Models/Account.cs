@@ -36,9 +36,12 @@ namespace WebApplication1.Models
 
     public class ListAccount
     {
-
+        ArticleDBContext context = null;
         String connStr = ConfigurationManager.ConnectionStrings["Proforum"].ConnectionString;
-
+        public ListAccount()
+        {
+            context = new ArticleDBContext();
+        }
         public string checkLogin(string username , string password, RoleAccount roleStr)
         {
             SqlConnection conn = new SqlConnection(connStr);
@@ -106,6 +109,19 @@ namespace WebApplication1.Models
             }
             return false;
         }
+  
+        public List<Account> getListAccount()
+        {
+            String sqlQuery = "select Username,Fullname,Status from UserAccount where Role!=1 ";
+            var list = context.Database.SqlQuery<Account>(sqlQuery).ToList();
+            return list;
+        }
+        public bool BlockAccount(string user)
+        {
+            String sqlQuery = "Update UserAccount set Status='Blocked' where Username={0}";
+             context.Database.ExecuteSqlCommand(sqlQuery, user);
+            return true;
+        }
     }
 
     public class CommonUse
@@ -140,6 +156,7 @@ namespace WebApplication1.Models
                 // ignored
             }
         }
+
     }
 
 }

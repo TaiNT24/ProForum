@@ -25,11 +25,11 @@ namespace WebApplication1.Controllers
                     Session.Remove("Redirect_to_PostArticle");
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 CommonUse.WriteLogError(e);
             }
-            
+
 
             return View();
         }
@@ -63,6 +63,7 @@ namespace WebApplication1.Controllers
 
                         Session["FULL_NAME"] = account.FullName.ToUpper();
                         Session["USER_NAME"] = account.Username;
+                        Session["ROLE"] = account.Role;
 
                         return RedirectToAction("Index", "Home");
                     }
@@ -72,7 +73,7 @@ namespace WebApplication1.Controllers
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 CommonUse.WriteLogError(e);
             }
@@ -104,7 +105,7 @@ namespace WebApplication1.Controllers
                 }
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ViewBag.Message = "This Username has been exist! Please choose another one";
                 CommonUse.WriteLogError(e);
@@ -116,7 +117,7 @@ namespace WebApplication1.Controllers
         public ActionResult Profile()
         {
             String username = Session["USER_NAME"].ToString();
-            
+
 
 
             if (username == null)
@@ -130,11 +131,39 @@ namespace WebApplication1.Controllers
                 ArticleList articleList = new ArticleList();
 
                 List<Article> listArticle = articleList.getListArticleOfUser(username);
-                
+
                 return View(listArticle);
 
             }
         }
 
+
+        public ActionResult Index()
+        {
+            List<Account> list = new List<Account>();
+            try
+            {
+                ListAccount accountList = new ListAccount();
+                list = accountList.getListAccount();
+    
+
+            }
+            catch (Exception e)
+            {
+                CommonUse.WriteLogError(e);
+            }
+
+
+            return View(list);
+        }
+        public ActionResult Block(string username)
+        {
+
+            ListAccount account = new ListAccount();
+            account.BlockAccount(username);
+            return RedirectToAction("Index", "Accounts");
+
+        }
     }
+
 }

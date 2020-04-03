@@ -55,13 +55,31 @@ namespace WebApplication1.Models
             var list = context.Database.SqlQuery<Article>(sqlQuery).ToList();
             return list;
         }
+        public List<Article> getListManagerArticle()
+        {
+            String sqlQuery = "select * from Article " +
+                                "Order by ArtPostTime desc";
+            var list = context.Database.SqlQuery<Article>(sqlQuery).ToList();
+            return list;
+        }
         public Article getDetailArticle(int? ArtId)
         {
             String sqlQuery = "select * from Article where ArtID={0}";
             var article = context.Database.SqlQuery<Article>(sqlQuery, ArtId).FirstOrDefault();
             return article;
         }
-
+        public bool Delete(int ArtId)
+        {
+            String sqlQuery = "Update Article set ArtStatus='Deleted' where ArtID={0}";
+            var check = context.Database.ExecuteSqlCommand(sqlQuery, ArtId);
+            return true;
+        }
+        public bool Approve(int ArtId)
+        {
+            String sqlQuery = "Update Article set ArtStatus='Active' where ArtID={0}";
+            var check = context.Database.ExecuteSqlCommand(sqlQuery, ArtId);
+            return true;
+        }
         public List<Article> searchActiveArticle(string searchVal)
         {
             searchVal = "%" +searchVal+ "%";
@@ -72,7 +90,16 @@ namespace WebApplication1.Models
             var list = context.Database.SqlQuery<Article>(sqlQuery,searchVal).ToList();
             return list;
         }
+        public List<Article> searchManagerArticle(string searchVal)
+        {
+            searchVal = "%" + searchVal + "%";
+            String sqlQuery = "select * from Article " +
+                                "where  ArtTittle like {0} " +
+                                "Order by ArtPostTime desc";
 
+            var list = context.Database.SqlQuery<Article>(sqlQuery, searchVal).ToList();
+            return list;
+        }
 
         public List<Article> getListArticleOfUser(string username)
         {

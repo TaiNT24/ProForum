@@ -1,0 +1,28 @@
+4/1/2020 10:53 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 10:54 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:16 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:16 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:18 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:18 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:18 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:18 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:18 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:18 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:18 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:18 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:18 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:18 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:19 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:19 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:19 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:19 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/1/2020 11:19 PM: .Net SqlClient Data Provider; Invalid column name 'Status'.
+4/3/2020 10:59 AM: System.Data; ID
+4/3/2020 11:02 AM: System.Data; ID
+4/3/2020 11:03 AM: System.Data; ID
+4/3/2020 11:04 AM: System.Data; ID
+4/3/2020 11:09 AM: System.Data; ID
+4/3/2020 11:09 AM: System.Data; ID
+4/3/2020 11:40 AM: EntityFramework; The specified cast from a materialized 'System.Boolean' type to the 'WebApplication1.Models.RoleAccount' type is not valid.
+4/3/2020 11:40 AM: EntityFramework; The specified cast from a materialized 'System.Boolean' type to the 'WebApplication1.Models.RoleAccount' type is not valid.
+4/3/2020 11:43 AM: EntityFramework; The specified cast from a materialized 'System.Boolean' type to the 'WebApplication1.Models.RoleAccount' type is not valid.

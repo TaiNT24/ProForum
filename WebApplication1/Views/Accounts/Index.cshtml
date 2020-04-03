@@ -1,0 +1,56 @@
+﻿@model IEnumerable<WebApplication1.Models.Account>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<h2>Manager Account</h2>
+<div class="tt-topic-list">
+    <div class="tt-list-header">
+        <div class="tt-col-topic col-10">List Account </div>
+
+
+    </div>
+
+    @*@Html.ActionLink("Edit", "Edit", new { id = item.ArtID })
+        @Html.ActionLink("Details", "Details", new { id = item.ArtID })
+        @Html.ActionLink("Delete", "Delete", new { id = item.ArtID })*@
+
+
+
+<table class="table table-bordred table-striped">
+    <thead>
+        <tr>
+            <th> Username</th>
+            <th> Fullname</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+
+        <tbody>
+            <tr>
+                <td>@Html.DisplayName(item.Username)</td>
+                <td>@Html.DisplayName(item.FullName)</td>
+                <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                <td>  <span class="glyphicon glyphicon-warning-sign">  @Html.ActionLink("Block", "Block", new { username = item.Username })</span></td>
+            </tr>
+        </tbody>
+    }
+</table>
+
+ 
+
+        @*<div class="tt-row-btn">
+                <button type="button" class="btn-icon js-topiclist-showmore">
+                    <svg class="tt-icon">
+                        <use xlink:href="#icon-load_lore_icon"></use>
+                    </svg>
+                </button>
+            </div>*@
+    
+</div>
+

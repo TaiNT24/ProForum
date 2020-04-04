@@ -32,3 +32,7 @@
 04/03/2020 19:10: .Net SqlClient Data Provider; Login failed for user 'sa'.
 04/03/2020 19:10: .Net SqlClient Data Provider; Login failed for user 'sa'.
 04/03/2020 20:23: System.Data; Invalid attempt to read when no data is present.
+4/4/2020 8:28 PM: .Net SqlClient Data Provider; Login failed for user 'sa'.
+4/4/2020 8:28 PM: .Net SqlClient Data Provider; Login failed for user 'sa'.
+4/4/2020 8:28 PM: .Net SqlClient Data Provider; Login failed for user 'sa'.
+4/4/2020 8:28 PM: .Net SqlClient Data Provider; Login failed for user 'sa'.

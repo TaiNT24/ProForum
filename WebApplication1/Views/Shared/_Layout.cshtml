@@ -37,7 +37,7 @@
                         }
 
                     }
-                    //not login
+                  
                     @if (Session["ROLE"] == null || Session["USER_NAME"] == null)
                     {
                         <li>@Html.ActionLink("Article", "Index", "Articles")</li>

@@ -1,0 +1,99 @@
+﻿@model WebApplication1.Models.ViewModelResult
+@{
+    ViewBag.Title = "Result";
+}
+
+    <div class="tt-single-topic">
+        <div class="tt-item-header">
+            <div class="tt-item-info info-top">
+                <div class="tt-avatar-icon">
+                    <i class="tt-icon"><svg><use xlink:href="#icon-ava-d"></use></svg></i>
+                </div>
+                <div class="tt-avatar-title">
+                    <a href="#"> @Html.DisplayFor(model => model.articleDetail.ArtAuthor)</a>
+                </div>
+                <a href="#" class="tt-info-time">
+                    <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i> @Html.DisplayFor(model => model.articleDetail.ArtPostTime)
+                </a>
+            </div>
+            <h1 class="tt-title">@Html.DisplayFor(model => model.articleDetail.ArtTittle)</h1>
+            <div class="tt-item-tag">
+
+            </div>
+        </div>
+        <div class="tt-item-description">
+
+            <h>
+                @Html.DisplayFor(model => model.articleDetail.ArtContent)
+            </h>
+
+        </div>
+
+
+        <br />
+
+        <br />
+
+        <br />
+        @using (Html.BeginForm("Create", "Comments", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Comment</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.comment.CommContent, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.comment.CommContent, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.comment.CommContent, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.comment.ArtID, new { Value = Model.articleDetail.ArtID})
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Post Comment" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.comment.CommContent, new { Value = "a" })
+            @Html.HiddenFor(model => model.comment.Username, new { Value = "a" })
+            @Html.HiddenFor(model => model.comment.CommPostTime, new { Value = "2020-02-02" })
+            @Html.HiddenFor(model => model.comment.ArtID, new { Value = "a" })
+        }
+        @foreach (var item in Model.listComment)
+        {
+
+            <section class="comment-list">
+                <!-- First Comment -->
+                <article class="row">
+                    <div class="col-md-2 col-sm-2 hidden-xs">
+                        <figure class="thumbnail">
+                            <img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png" />
+                            <figcaption class="text-center">  @Html.DisplayFor(modelItem => item.Username)</figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-10 col-sm-10">
+                        <div class="panel panel-default arrow left">
+                            <div class="panel-body">
+                                <header class="text-left">
+                                    <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
+                                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>  @Html.DisplayFor(modelItem => item.CommPostTime)</time>
+                                </header>
+                                <div class="comment-post">
+                                    <p>
+                                        @Html.DisplayFor(modelItem => item.CommContent)
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        }
+    </div>
+

@@ -40,6 +40,7 @@ namespace WebApplication1.Controllers
         {
 
             ArticleList articleList = new ArticleList();
+
             articleList.Delete(id);
             return RedirectToAction("Index", "Admin");
 

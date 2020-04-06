@@ -21,7 +21,7 @@
         //article ID
         <div class="tt-topic-alert tt-alert-default" role="alert">
             @Html.ActionLink(item.ArtTittle, "Details", "Articles"
-                                ,new { id = item.ArtID }, null)
+                                , new { id = item.ArtID }, null)
         </div>
 
         <div class="tt-item tt-itemselect">
@@ -48,7 +48,28 @@
 
                         </div>
                     </div>
-                    Status: @Html.DisplayName(item.ArtStatus)
+                    Status: 
+                    <p>
+                        @if (item.ArtStatus.Equals("New"))
+                        {
+                            <span class="label label-warning">
+                                @Html.DisplayFor(modelItem => item.ArtStatus)
+                            </span>
+                        }
+                        @if (item.ArtStatus.Equals("Active"))
+                        {
+                            <span class="label label-success">
+                                @Html.DisplayFor(modelItem => item.ArtStatus)
+                            </span>
+                        }
+                        @if (item.ArtStatus.Equals("Deleted"))
+                        {
+                            <span class="label label-danger">
+                                @Html.DisplayFor(modelItem => item.ArtStatus)
+                            </span>
+                        }
+
+                    </p>
                 </div>
             </div>
 

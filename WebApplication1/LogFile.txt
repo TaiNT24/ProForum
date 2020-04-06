@@ -36,3 +36,5 @@
 4/4/2020 8:28 PM: .Net SqlClient Data Provider; Login failed for user 'sa'.
 4/4/2020 8:28 PM: .Net SqlClient Data Provider; Login failed for user 'sa'.
 4/4/2020 8:28 PM: .Net SqlClient Data Provider; Login failed for user 'sa'.
+04/06/2020 07:51: .Net SqlClient Data Provider; Violation of PRIMARY KEY constraint 'PK__Account__536C85E5006AA75E'. Cannot insert duplicate key in object 'dbo.UserAccount'. The duplicate key value is (tai1).
+The statement has been terminated.

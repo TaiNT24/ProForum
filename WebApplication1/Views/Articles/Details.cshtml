@@ -38,13 +38,13 @@
                 if (Model.articleDetail.ArtStatus.ToString().Equals("New"))
                 {
 
-                    <span class="glyphicon glyphicon-ok">  @Html.ActionLink("Approve", "Approved", new { id = Model.articleDetail.ArtID }) </span>
+                    <span class="glyphicon glyphicon-ok">  @Html.ActionLink("Approve", "Approved", "Admin", new { id = Model.articleDetail.ArtID }, null) </span>
 
                 }
 
                 if (Model.articleDetail.ArtStatus.ToString().Equals("Active") || Model.articleDetail.ArtStatus.ToString().Equals("New"))
                 {
-                    <span class="glyphicon glyphicon-remove-circle">    @Html.ActionLink("Delete", "Deleted", new { id = (Model.articleDetail.ArtID) })</span>
+                    <span class="glyphicon glyphicon-remove-circle">    @Html.ActionLink("Delete", "Deleted", "Admin", new { id = (Model.articleDetail.ArtID) }, null)</span>
                 }
 
 
@@ -67,7 +67,7 @@
             <div class="form-horizontal">
                 <h4>Comment</h4>
                 <hr />
-                @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.comment.CommContent, htmlAttributes: new { @class = "control-label col-md-2" })

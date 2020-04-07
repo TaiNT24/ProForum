@@ -19,8 +19,8 @@ namespace WebApplication1.Models
         public string ArtTittle { get; set; }
 
         [Required]
-        [StringLength(3000)]
-        [MinLength(20)]
+        [StringLength(8000)]
+        [MinLength(50)]
         public string ArtContent { get; set; }
 
         public DateTime ArtPostTime { get; set; }
@@ -73,13 +73,21 @@ namespace WebApplication1.Models
         {
             String sqlQuery = "Update Article set ArtStatus='Deleted' where ArtID={0}";
             var check = context.Database.ExecuteSqlCommand(sqlQuery, ArtId);
-            return true;
+            if (check > 0)
+            {
+                return true;
+            }
+            return false;
         }
         public bool Approve(int ArtId)
         {
             String sqlQuery = "Update Article set ArtStatus='Active' where ArtID={0}";
             var check = context.Database.ExecuteSqlCommand(sqlQuery, ArtId);
-            return true;
+            if (check > 0)
+            {
+                return true;
+            }
+            return false;
         }
         public List<Article> searchActiveArticle(string searchVal)
         {

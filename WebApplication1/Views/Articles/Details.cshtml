@@ -17,6 +17,27 @@
                 </a>
             </div>
 
+
+            @if (Session["ROLE"] != null && Session["USER_NAME"] != null)
+            {
+                if (Session["ROLE"].ToString().Equals("Admin"))
+                {
+                    if (Model.articleDetail.ArtStatus.ToString().Equals("New"))
+                    {
+
+                        <span class="glyphicon glyphicon-ok">  @Html.ActionLink("Approve", "Approved", "Admin", new { id = Model.articleDetail.ArtID }, null) </span>
+
+                    }
+
+                    if (Model.articleDetail.ArtStatus.ToString().Equals("Active") || Model.articleDetail.ArtStatus.ToString().Equals("New"))
+                    {
+                        <span class="glyphicon glyphicon-remove-circle">    @Html.ActionLink("Delete", "Deleted", "Admin", new { id = (Model.articleDetail.ArtID) }, null)</span>
+                    }
+                }
+            }
+
+
+
             <div class="tt-item-tag">
                 <h1 class="tt-title">@Html.DisplayFor(model => model.articleDetail.ArtTittle)</h1>
             </div>
@@ -31,30 +52,7 @@
         <br />
         <br />
         <br />
-        @if (Session["ROLE"] != null && Session["USER_NAME"] != null)
-        {
-            if (Session["ROLE"].ToString().Equals("Admin"))
-            {
-                if (Model.articleDetail.ArtStatus.ToString().Equals("New"))
-                {
-
-                    <span class="glyphicon glyphicon-ok">  @Html.ActionLink("Approve", "Approved", "Admin", new { id = Model.articleDetail.ArtID }, null) </span>
-
-                }
-
-                if (Model.articleDetail.ArtStatus.ToString().Equals("Active") || Model.articleDetail.ArtStatus.ToString().Equals("New"))
-                {
-                    <span class="glyphicon glyphicon-remove-circle">    @Html.ActionLink("Delete", "Deleted", "Admin", new { id = (Model.articleDetail.ArtID) }, null)</span>
-                }
-
-
-
-
-
-            }
-
-
-        }
+        
 
 
 

@@ -19,38 +19,47 @@
 
 
 
-<table class="table table-bordred table-striped">
-    <thead>
-        <tr>
-            <th> Username</th>
-            <th> Fullname</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
-    </thead>
-    @foreach (var item in Model)
-    {
-
-        <tbody>
+    <table class="table table-bordred table-striped">
+        <thead>
             <tr>
-                <td>@Html.DisplayName(item.Username)</td>
-                <td>@Html.DisplayName(item.FullName)</td>
-                <td> @Html.DisplayFor(modelItem => item.Status)</td>
-                <td>  <span class="glyphicon glyphicon-warning-sign">  @Html.ActionLink("Block", "Block", new { username = item.Username })</span></td>
+                <th> Username</th>
+                <th> Fullname</th>
+                <th>Status</th>
+                <th></th>
             </tr>
-        </tbody>
-    }
-</table>
+        </thead>
+        @foreach (var item in Model)
+        {
 
- 
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayName(item.Username)</td>
+                    <td>@Html.DisplayName(item.FullName)</td>
+                    <td> @Html.DisplayFor(modelItem => item.Status)</td>
 
-        @*<div class="tt-row-btn">
-                <button type="button" class="btn-icon js-topiclist-showmore">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-load_lore_icon"></use>
-                    </svg>
-                </button>
-            </div>*@
-    
+                    @if (item.Status.Equals("Active"))
+                    {
+                        <td>
+                            <span class="glyphicon glyphicon-warning-sign">
+                                @Html.ActionLink("Block", "Block", new { username = item.Username })
+                            </span>
+                        </td>
+                    }
+
+                </tr>
+            </tbody>
+        }
+    </table>
+
+
+
+    @*<div class="tt-row-btn">
+            <button type="button" class="btn-icon js-topiclist-showmore">
+                <svg class="tt-icon">
+                    <use xlink:href="#icon-load_lore_icon"></use>
+                </svg>
+            </button>
+        </div>*@
+
 </div>
 

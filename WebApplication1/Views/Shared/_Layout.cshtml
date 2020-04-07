@@ -37,7 +37,7 @@
                         }
 
                     }
-                  
+
                     @if (Session["ROLE"] == null || Session["USER_NAME"] == null)
                     {
                         <li>@Html.ActionLink("Article", "Index", "Articles")</li>
@@ -63,18 +63,23 @@
                         <li>@Html.ActionLink("Logout", "Logout", "Accounts")</li>
                     }
                 </ul>
-                
+
                 <ul class="nav navbar-nav navbar-right">
-                    <form class="form-group navbar-text" action="Articles">
-                        <input type="text" class="form-control"
-                               name="searchVal"
-                               placeholder="Search article" />
-                    </form>
+
+
+                    @using (Html.BeginForm("Index", "Articles"))
+                    {
+                        <form class="form-group navbar-text">
+                            <input type="text" class="form-control"
+                                   name="searchVal"
+                                   placeholder="Search article" />
+                        </form>
+                    }
                 </ul>
-                    
+
             </div>
 
-                
+
         </div>
     </div>
 
